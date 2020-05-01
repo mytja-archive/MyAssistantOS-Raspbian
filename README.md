@@ -27,21 +27,39 @@ pip install PocketSphinx
 # Install TTS engine
 That is one of the most difficult part if you use Windows. If you use Linux it is simple.
 Full tutorial is avaiable here: https://github.com/grigi/talkey
-Thanks to grigi.
+Thanks to @grigi.
 
 # Get the API key from OWM
 OWM is OpenWeatherMap. If you want My to tell you the weather, then you will need the API key.
 Full tutorial is avaiable here: https://github.com/csparpa/pyowm
-Thanks to csparpa
+Thanks to @csparpa
 
 Here you go! You are done!
 
 # How to use me?
-You say: "Hey, My" or "O.K. My" or "Okay My"
+You say: "Hey, My" or "O.K. My" or "Okay My" or "Wake up, My"
+
 If he senses that succesfully, then he will respond with beep beep sound. Then you say your question. But he doesn't know everything.
 
 # Customizing
 You can play offline your favorite song. Download it and rename it to "favorite" it is best to use mp3.
 
 # Offline mode
+*Not avaiable yet*
+
 Offline mode is only for chat and some music. My uses as offline speech recognition service Sphinx. It doesn't recognize the best, but it certanly tries.
+
+# Testing & Compatibility
+
+If you could contribute with testing our software, that would be great. Write bugs and ideas in issues. I will respond as fast as possible. Thank you.
+
+Here is a compatibility table:
+
+Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
+------------------ | :----------: | :----------: | :---------: | -----
+Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
+Raspbian           |              |             |      ✔     |
+Linux              |              |             |      ✔     | 
+Ubuntu             |              |             |      ✔     | 
+Windows 10         |              |             |      ✔     | 
+macOS              |              |             |      ✔     | 
