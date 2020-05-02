@@ -1,1 +1,6 @@
+cd ~/Desktop
+rm -rf MyAssistantOS-Raspbian
 git clone https://github.com/mytja/MyAssistantOS-Raspbian/
+cd MyAssistantOS-Raspbian
+chmod +x updater
+./move_updater
