@@ -6,6 +6,11 @@ import talkey
 from random import randint, choice
 import wikipedia
 import pyowm
+import urllib
+from bs4 import BeautifulSoup
+import pafy
+import vlc
+import os
 
 InternetMode = 1
 
@@ -28,7 +33,11 @@ m = sr.Microphone()
 
 tts = talkey.Talkey()
 
-def yesOrNo():
+def recognitionMode(recognitionint):
+    InternetMode = recognitionint
+    return InternetMode
+
+def yesOrNo():                                      # Not in use
     with sr.Microphone() as source:
         playsound('media/beep_my.wav')
         print("I'm listening!")
@@ -105,15 +114,37 @@ def MyMain():
     elif mymainr=="what's your favorite drink":
         tts.say("Electricity.")
         My = False
+    elif mymainr=="version":
+        tts.say("Guinea pig 1.0.1")
+        My = False
+    elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
+        tts.say("I like pizza.")
+        My = False
+    elif mymainr=="go to offline mode":
+        tts.say("Going to offline mode.")
+        recognitionMode(0)
+        My = False
+    elif mymainr=="go to online mode":
+        tts.say("Going to online mode.")
+        recognitionMode(1)
+        My = False
+    elif mymainr=="power off":
+        os.system("./poweroff")
+    elif mymainr=="reboot":
+        os.system("./reboot")
+    elif mymainr=="check for updates" or mymainr=="check for system updates" or mymainr=="update" or mymainr=="update your software":
+        os.system("./update-from-my")
+        kill-this-process() #this kills the process of My, because this function doesn't exist
+        My = False
     else:
         query = mymainr
-        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are"]
+        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are", "play"]
         querywords = query.split() 
         resultwords  = [word for word in querywords if word.lower() in stopwords]
         result = ' '.join(resultwords)
         print(result)
         
-        if (result=="what is the weather like in"):
+        if (result=="what is the weather like in" or result=="what's the weather like in"):
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
             result = ' '.join(resultwords)
             print(result)
@@ -136,18 +167,36 @@ def MyMain():
             temp = temperature["temp"]
             print(temp)
             tts.say("Temperature in " + str(result) + "is" + str(temperature["temp"]) + "degrees celcius. There is a humidity of " + str(humidity) + "percent. It is" + str(finalweather))
-        elif (result=="what's the weather like in"):
-            resultwords  = [word for word in querywords if word.lower() not in stopwords]
+        elif (result=="play" or result=="Play"):
+            query = mymainr
+            swords = ["play"]
+            querywords = query.split()
+            resultwords  = [word for word in querywords if word.lower() not in swords]
             result = ' '.join(resultwords)
             print(result)
-            observation = owm.weather_at_place(result)
-            w = observation.get_weather()
-            temperature = w.get_temperature('celsius')
-            humidity = w.get_humidity()
-            print(temperature)
-            temp = temperature["temp"]
-            print(temp)
-            tts.say("Temperature in " + str(result) + "is" + str(temperature["temp"]) + "degrees celcius. There is a humidity of " + str(humidity) + "percent.")
+            ytlinks = []
+            textToSearch = result
+            query = urllib.quote_plus(textToSearch)
+            url = "https://www.youtube.com/results?search_query=" + query
+            response = urllib.urlopen(url)
+            html = response.read()
+            soup = BeautifulSoup(html, 'html.parser')
+            for vid in soup.findAll(attrs={'class':'yt-uix-tile-link'}):
+                video = 'https://www.youtube.com' + vid['href']
+                ytlinks.append(video)
+            print(ytlinks[0])
+            ytlink = ytlinks[0]
+            
+            video = pafy.new(ytlink)
+            best = video.getbest()
+            playurl = best.url
+
+            Instance = vlc.Instance()
+            player = Instance.media_player_new()
+            Media = Instance.media_new(playurl)
+            Media.get_mrl()
+            player.set_media(Media)
+            player.play()
         else:
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
             result = ' '.join(resultwords)
