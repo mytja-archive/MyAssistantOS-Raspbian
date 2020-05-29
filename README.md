@@ -73,8 +73,11 @@ macOS              |              |             |      ✔     |
 # DLL Files
 
 IMPORTANT!!!!!!
+
 DLL files are included, because during the testing I had some problems with dll files. If you are using Windows include them into C:/Windows/System32.
+
 THIS DLL FILES ARE NOT DEVELOPED BY MyTja AND THEY MIGHT NOT BE COMPATIBLE WITH YOUR DEVICE!!! USE THEM AT YOUR OWN RISK!!! FILES ARE SCANNED WITH VIRUSTOTAL AND WITH LATEST RELEASE DO NOT COME WITH ANY MALWARE!!!!
+
 You can get DLL files in dll branch.
 
 # Programming language
@@ -87,3 +90,20 @@ _This part is talking about new feature, that was not tested._
 You can check for updates with 2 different ways:
 1. Reboot My (tested way)
 2. Say "check for updates" or "update" (new feature that is not yet tested)
+
+# OOBE and OWM key
+*This part is talking about a feature, that isn't released yet, or is in early publishment phase*
+
+OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
+
+# LTS (Long Term Support)
+*This part is talking about special LTS releases, that aren't published yet*
+
+Long Term Support (LTS) release is a stable release, that is promoted to an LTS edition. Normaly, an LTS edition has 2 years of support, other releases end their support in 3 months from first publishing.
+
+# Volume commands
+Volume commands are
+- Maximum
+- Minimum
+- Volume up/down
+- Medium volume
