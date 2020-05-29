@@ -14,7 +14,11 @@ import os
 
 InternetMode = 1
 
-owm = pyowm.OWM("", subscription_type="free")
+owmlicense = open("~/Desktop/OWM_license.txt", "r")
+owmlicensekey = owmlicense.read()
+print(owmlicensekey)
+
+owm = pyowm.OWM(str(owmlicensekey), subscription_type="free")
 
 jokelist = ["What's the best thing about Switzerland? I don't know, but the flag is a big plus",
             "Hear about the new restaurant called Karma? There is no menu. You get what you deserve",
@@ -33,9 +37,22 @@ m = sr.Microphone()
 
 tts = talkey.Talkey()
 
+class wpfilter(object):
+   def removeunwanted(self, s):
+      s = s.replace("-","")
+      s = s.replace("_","")
+      s = s.replace("/","")
+      s = s.replace("(","")
+      s = s.replace(")","")
+      s = s.replace("&","")
+      s = s.replace(":","")
+      return s
+
+wpfilter1 = wpfilter()
+
 def recognitionMode(recognitionint):
+    global InternetMode
     InternetMode = recognitionint
-    return InternetMode
 
 def yesOrNo():                                      # Not in use
     with sr.Microphone() as source:
@@ -61,6 +78,7 @@ def MyMain():
         mymainr = r.recognize_sphinx(audio)
     elif (InternetMode==1):
         mymainr = r.recognize_google(audio)
+    mymainr = mymainr.lower()
     print(mymainr)
     if mymainr=="how are you":
         print("I'm very good! How are you?")
@@ -70,15 +88,16 @@ def MyMain():
         print("Sure! Why not?")
         tts.say("Sure! Why not?")
         My = False
+    elif(mymainr=="do you like alexa" or mymainr=="do you like Alexa" or mymainr=="do you know alexa" or mymainr=="do you know Alexa" or
+         mymainr=="do you like Siri" or mymainr=="do you like siri" or mymainr=="do you know siri" or mymainr=="do you know Siri" or
+         mymainr=="do you like google assistant" or mymainr=="do you like Google assistant" or mymainr=="do you know google assistant" or mymainr=="do you know Google assistant" or
+         ):
+       tts.say("I pay respect to all of voice assistants. Being an voice assistant is not an easy job.
     elif mymainr=="do you think I'm pretty":
         print("Sure you are!")
         tts.say("Sure you are!")
         My = False
-    elif mymainr=="who let the dogs out":
-        print("who, who, who, who, who")
-        tts.say("who, who, who, who, who")
-        My = False
-    elif mymainr=="who Let The Dogs Out":
+    elif mymainr=="who let the dogs out" or mymainr=="who Let The Dogs Out":
         print("who, who, who, who, who")
         tts.say("who, who, who, who, who")
         My = False
@@ -87,35 +106,29 @@ def MyMain():
         print(joke)
         tts.say(joke)
         My = False
-    elif mymainr=="sing me a lullaby":
+    elif mymainr=="sing me a lullaby" or mymainr=="play me a lullaby":
         playsound("media/lullaby.wav")
         My = False
-    elif mymainr=="sing my favorite song":
-        playsound("media/favorite.mp3")
-        My = False
-    elif mymainr=="play my favorite song":
+    elif mymainr=="sing my favorite song" or mymainr=="play my favorite song":
         playsound("media/favorite.mp3")
         My = False
     elif mymainr=="am I funny":
         tts.say("Sure you are!")
         My = False
-    elif mymainr=="who created you":
+    elif mymainr=="who created you" or mymainr=="who designeed you":
         tts.say("I was designed by MyTja Team.")
         My = False
-    elif mymainr=="when were you published":
-        tts.say("My first software release came out on second of May 2020")
-        My = False
-    elif mymainr=="when were you created":
+    elif mymainr=="when were you published" or mymainr=="when were you created":
         tts.say("My first software release came out on second of May 2020")
         My = False
     elif mymainr=="how to check for updates":
-        tts.say("Reboot me!")
+        tts.say("Reboot me or say check for updates!")
         My = False
     elif mymainr=="what's your favorite drink":
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Guinea pig 1.0.1")
+        tts.say("Guinea pig 1.0.2")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -128,13 +141,28 @@ def MyMain():
         tts.say("Going to online mode.")
         recognitionMode(1)
         My = False
-    elif mymainr=="power off":
+    elif mymainr=="power off" or mymainr=="shutdown" or mymainr=="shut down":
         os.system("./poweroff")
     elif mymainr=="reboot":
         os.system("./reboot")
     elif mymainr=="check for updates" or mymainr=="check for system updates" or mymainr=="update" or mymainr=="update your software":
         os.system("./update-from-my")
         kill-this-process() #this kills the process of My, because this function doesn't exist
+        My = False
+    elif mymainr=="higher volume" or mymainr=="louder" or mymainr=="volume up":
+        os.system("./highervolume")
+        My = False
+    elif mymainr=="lower volume" or mymainr=="quieter" or mymainr=="volume down":
+        os.system("./lowervolume")
+        My = False
+    elif mymainr=="medium volume":
+        os.system("./mediumvolume")
+        My = False
+    elif mymainr=="minimum volume" or mymainr=="minimum":
+        os.system("./minvolume")
+        My = False
+    elif mymainr=="maximum volume" or mymainr=="maximum":
+        os.system("./maxvolume")
         My = False
     else:
         query = mymainr
@@ -201,9 +229,12 @@ def MyMain():
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
             result = ' '.join(resultwords)
             print(result)
+            
             summary = wikipedia.summary(result, sentences=1)
+            filteredtext = wpfilter1.removeunwanted(summary)
+            print(filteredtext)
             print(summary)
-            tts.say(summary)
+            tts.say(str(filteredtext))
         
 
 with m as source:

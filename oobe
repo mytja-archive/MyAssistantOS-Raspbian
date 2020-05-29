@@ -18,4 +18,6 @@ python -m pip install vlc --user
 python -m pip install bs4 --user
 python -m pip install urllib --user
 python -m pip install pafy --user
+cd ~/Desktop
+touch OWM_license.txt
 python my.py
