@@ -51,7 +51,7 @@ Thanks to VLC for Python, pafy and BeautifulSoup we can play music and video fro
 You can play offline your favorite song. Download it and rename it to "favorite" it is best to use mp3.
 
 # Offline mode
-*Not avaiable yet*
+*This feature is new and tested*
 
 Offline mode is only for chat and some music. My uses as offline speech recognition service Sphinx. It doesn't recognize the best, but it certanly tries.
 
