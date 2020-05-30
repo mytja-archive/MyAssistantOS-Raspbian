@@ -1,0 +1,2 @@
+mv updater ~/Desktop
+chmod +x updater
