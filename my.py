@@ -90,9 +90,9 @@ def MyMain():
         My = False
     elif(mymainr=="do you like alexa" or mymainr=="do you like Alexa" or mymainr=="do you know alexa" or mymainr=="do you know Alexa" or
          mymainr=="do you like Siri" or mymainr=="do you like siri" or mymainr=="do you know siri" or mymainr=="do you know Siri" or
-         mymainr=="do you like google assistant" or mymainr=="do you like Google assistant" or mymainr=="do you know google assistant" or mymainr=="do you know Google assistant" or
-         ):
-       tts.say("I pay respect to all of voice assistants. Being an voice assistant is not an easy job.
+         mymainr=="do you like google assistant" or mymainr=="do you like Google assistant" or mymainr=="do you know google assistant" or mymainr=="do you know Google assistant"):
+         
+       tts.say("I pay respect to all of voice assistants. Being an voice assistant is not an easy job.")
     elif mymainr=="do you think I'm pretty":
         print("Sure you are!")
         tts.say("Sure you are!")
@@ -128,7 +128,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Guinea pig 1.0.2")
+        tts.say("Beta 1.0.2")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
