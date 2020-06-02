@@ -90,9 +90,9 @@ def MyMain():
         My = False
     elif(mymainr=="do you like alexa" or mymainr=="do you like Alexa" or mymainr=="do you know alexa" or mymainr=="do you know Alexa" or
          mymainr=="do you like Siri" or mymainr=="do you like siri" or mymainr=="do you know siri" or mymainr=="do you know Siri" or
-         mymainr=="do you like google assistant" or mymainr=="do you like Google assistant" or mymainr=="do you know google assistant" or mymainr=="do you know Google assistant" or
-         ):
-       tts.say("I pay respect to all of voice assistants. Being an voice assistant is not an easy job.
+         mymainr=="do you like google assistant" or mymainr=="do you like Google assistant" or mymainr=="do you know google assistant" or mymainr=="do you know Google assistant"):
+         
+       tts.say("I pay respect to all of voice assistants. Being an voice assistant is not an easy job.")
     elif mymainr=="do you think I'm pretty":
         print("Sure you are!")
         tts.say("Sure you are!")
@@ -128,7 +128,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Guinea pig 1.0.2")
+        tts.say("Guinea pig 1.0.3")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -212,29 +212,35 @@ def MyMain():
             for vid in soup.findAll(attrs={'class':'yt-uix-tile-link'}):
                 video = 'https://www.youtube.com' + vid['href']
                 ytlinks.append(video)
-            print(ytlinks[0])
-            ytlink = ytlinks[0]
+            try:
+               print(ytlinks[0])
+               ytlink = ytlinks[0]
             
-            video = pafy.new(ytlink)
-            best = video.getbest()
-            playurl = best.url
+               video = pafy.new(ytlink)
+               best = video.getbest()
+               playurl = best.url
 
-            Instance = vlc.Instance()
-            player = Instance.media_player_new()
-            Media = Instance.media_new(playurl)
-            Media.get_mrl()
-            player.set_media(Media)
-            player.play()
+               Instance = vlc.Instance()
+               player = Instance.media_player_new()
+               Media = Instance.media_new(playurl)
+               Media.get_mrl()
+               player.set_media(Media)
+               player.play()
+            except:
+               tts.say("Please be more specific. Maybe tell me an author or something more.")
         else:
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
             result = ' '.join(resultwords)
             print(result)
             
-            summary = wikipedia.summary(result, sentences=1)
-            filteredtext = wpfilter1.removeunwanted(summary)
-            print(filteredtext)
-            print(summary)
-            tts.say(str(filteredtext))
+            try:
+               summary = wikipedia.summary(result, sentences=1)
+               filteredtext = wpfilter1.removeunwanted(summary)
+               print(filteredtext)
+               print(summary)
+               tts.say(str(filteredtext))
+            except:
+               tts.say("Sorry, but I cannot tell you that, because a bug in my code.")
         
 
 with m as source:
