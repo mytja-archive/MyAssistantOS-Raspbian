@@ -4,7 +4,6 @@ python:
 # command to install dependencies
 install:
   - pip install SpeechRecognition
-  - pip install PyAudio
   - pip install playsound
   - pip install talkey
   - pip install wikipedia
