@@ -13,4 +13,4 @@ install:
   - pip install bs4
 # command to run tests
 script:
-  - my
+  - my.py
