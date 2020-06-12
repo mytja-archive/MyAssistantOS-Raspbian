@@ -8,7 +8,6 @@ install:
   - pip install talkey
   - pip install wikipedia
   - pip install pyowm
-  - pip install PocketSphinx
   - pip install python-vlc
   - pip install pafy
   - pip install bs4
