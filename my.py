@@ -47,7 +47,7 @@ InternetMode = 1
 
 myalarm = True
 
-owmlicense = open("OWM_license.txt", "r")
+owmlicense = open("~/Desktop/OWM_license.txt", "r")
 owmlicensekey = owmlicense.read()
 print(owmlicensekey)
 
