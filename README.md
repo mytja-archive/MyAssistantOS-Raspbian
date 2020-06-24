@@ -107,3 +107,17 @@ Volume commands are
 - Minimum
 - Volume up/down
 - Medium volume
+
+# Timer, stopwatch and alarm
+*This feature is partly tested*
+
+Recognition for alarm doesn't work the best, so we don't reccomend to use it!
+You can use stopwatch by saying: Hey, My - Stopwatch
+You can use timer by saying: Hey, My - Set a timer for XX seconds/minutes/hours/days
+
+# Real time clock (RTC)
+Just say "what's the time" or "what's the date" and he will answer you
+
+# Pick a number game
+*This game is not functional as first tests showed us! We will continue to resolve it and hopefuly with stable/LTS 1.1, we will fix it*
+Just say pick a number and guess numbers. Tell him only number, not "is it ....".
