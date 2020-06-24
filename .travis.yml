@@ -1,0 +1,16 @@
+language: python
+python:
+  - "2.7"
+# command to install dependencies
+install:
+  - pip install SpeechRecognition
+  - pip install playsound
+  - pip install talkey
+  - pip install wikipedia
+  - pip install pyowm
+  - pip install python-vlc
+  - pip install pafy
+  - pip install bs4
+# command to run tests
+script:
+  - python my.py
