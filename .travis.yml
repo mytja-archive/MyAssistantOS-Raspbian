@@ -1,5 +1,5 @@
 os:
-  - raspbian
+  - debian
   - windows
   - osx
 language: python
