@@ -12,8 +12,7 @@ install:
   - pip install pafy
   - pip install bs4
   - pip install youtube-dl
-  - chmod +x oobe
-  - ./oobe
+  - touch OWM_license.txt
 # command to run tests
 script:
   - python my.py
