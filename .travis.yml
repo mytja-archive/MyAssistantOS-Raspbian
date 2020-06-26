@@ -1,5 +1,6 @@
 os:
-  - debian
+  - linux
+    dist: bionic
   - windows
   - osx
 language: python
