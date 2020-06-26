@@ -1,6 +1,6 @@
 ﻿import speech_recognition as sr
 import time
-import pyaudio
+# import pyaudio
 from playsound import playsound
 import talkey
 from random import randint, choice
@@ -11,14 +11,47 @@ from bs4 import BeautifulSoup
 import pafy
 import vlc
 import os
+import StrToInt as strtoint
+import thread
+
+alarm1 = []
+alarm2 = []
+alarm3 = []
+
+daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+def RTCwithAlarm():                # Some functions are not in use and will be used in future
+   while True:
+      lt = time.localtime()
+      dayoftheweek = lt.tm_wday
+      day = lt.tm_mday
+      month = lt.tm_mon
+      year = lt.tm_year
+      minute = lt.tm_min
+      hour = lt.tm_hour
+      if (hour == alarm1 and minute < (alarm[1] + 03)):
+         playsound("media/alarm.wav")
+      if (hour == alarm2 and minute < 03):
+         playsound("media/alarm.wav")
+      if (hour == alarm3 and minute < 03):
+         playsound("media/alarm.wav")
+
+stopwatch = False
+stopwatchTime = 0
+
+timer = False
+timerTime = 0
 
 InternetMode = 1
+
+myalarm = True
 
 owmlicense = open("~/Desktop/OWM_license.txt", "r")
 owmlicensekey = owmlicense.read()
 print(owmlicensekey)
 
-owm = pyowm.OWM(str(owmlicensekey), subscription_type="free")
+owm = pyowm.OWM(str(owmlicensekey), subscription_type="free") # Here you can change your subscription to OWM and API
 
 jokelist = ["What's the best thing about Switzerland? I don't know, but the flag is a big plus",
             "Hear about the new restaurant called Karma? There is no menu. You get what you deserve",
@@ -31,6 +64,8 @@ jokelist = ["What's the best thing about Switzerland? I don't know, but the flag
             ]
 
 My = False
+
+
 
 r = sr.Recognizer()
 m = sr.Microphone()
@@ -49,6 +84,69 @@ class wpfilter(object):
       return s
 
 wpfilter1 = wpfilter()
+
+def redirectPickANumber(number, trial):
+   tts.say("Try again")
+   PickANumberGame(number, trial+1)
+   
+
+def PickANumberGame(number, trial):  # Currently defective - still in production
+   with sr.Microphone() as source:
+      playsound('media/beep_my.wav')
+      print("I'm listening!")
+      audio = r.listen(source)
+   recognition = r.recognize_google(audio)
+   query = recognition
+   stopwords = ['is','the','number','it']
+   querywords = query.split() 
+   resultwords  = [word for word in querywords if word.lower() not in stopwords]
+   result = ' '.join(resultwords)
+   print(result)
+   numberguess = strtoint.StrToInt(result)
+   print(numberguess)
+   print(number)
+   if query == "tell me it":
+      tts.say(number)
+   if trial < 4:
+      if numberguess == number:
+         tts.say("You guessed!")
+      else:
+         
+         redirectPickANumber(number, trial)
+   else:
+      tts.say("Oooof! That was hard. Number was " + str(number))
+
+def Timer(seconds):
+   global timer
+   global timerTime
+   timerTime = seconds
+   while timer==True:
+      time.sleep(1)
+      timerTime = timerTime - 1
+
+def Stopwatch():
+   global stopwatch
+   global stopwatchTime
+   stopwatchTime = 0
+   while (stopwatch==True):
+      time.sleep(1)
+      stopwatchTime = stopwatchTime + 1
+
+def StopwatchStartup():
+   global stopwatch
+   tts.say("5")
+   time.sleep(1)
+   tts.say("4")
+   time.sleep(1)
+   tts.say("3")
+   time.sleep(1)
+   tts.say("2")
+   time.sleep(1)
+   tts.say("1")
+   time.sleep(1)
+   tts.say("Start")
+   stopwatch = True
+   thread.start_new_thread(Stopwatch, ())
 
 def recognitionMode(recognitionint):
     global InternetMode
@@ -128,7 +226,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Beta 1.0.2")
+        tts.say("Guinea pig 1.1")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -164,9 +262,46 @@ def MyMain():
     elif mymainr=="maximum volume" or mymainr=="maximum":
         os.system("./maxvolume")
         My = False
+    elif mymainr=="what's the time" or mymainr=="what is the time":
+       lt = time.localtime()
+       lth = lt.tm_hour
+       ltm = lt.tm_min
+       tts.say("It's " + str(lth) + "and" + str(ltm) + "minutes.")
+    elif mymainr=="what's the date":
+       lt = time.localtime()
+       lty = lt.tm_year
+       ltmon = lt.tm_mon
+       ltday = lt.tm_mday
+       ltdayofweek = lt.tm_wday
+       th = ""
+       if (ltday=="21"):
+          th = "twentyfirst"
+       elif (ltday=="1"):
+          th = "first"
+       elif (ltday=="31"):
+          th = "thirtyfirst"
+       elif (ltday=="22"):
+          th = "twentysecond"
+       elif (ltday=="2"):
+          th = "second"
+       elif (ltday=="23"):
+          th = "thirtythird"
+       elif (ltday=="3"):
+          th = "third"
+          
+       tts.say("It's " + daysOfTheWeek[ltdayofweek] + th + "Of" + monthsOfTheYear[ltmon-1] + str(lty))
+    elif mymainr=="set the stopwatch" or mymainr=="set a stopwatch" or mymainr=="stopwatch":
+       StopwatchStartup()
+    elif mymainr=="stop":
+       global stopwatch
+       if (stopwatch==True):
+          stopwatch = False
+          tts.say("Time (in seconds): " + str(stopwatchTime))
+    elif mymainr == "pick a number":
+       PickANumberGame(randint(0, 10), 1)
     else:
         query = mymainr
-        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are", "play"]
+        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are", "play", "set the alarm at", "set alarm at", "set an alarm at", "set a stopwatch", "set the timer for", "set a timer for"]
         querywords = query.split() 
         resultwords  = [word for word in querywords if word.lower() in stopwords]
         result = ' '.join(resultwords)
@@ -195,6 +330,7 @@ def MyMain():
             temp = temperature["temp"]
             print(temp)
             tts.say("Temperature in " + str(result) + "is" + str(temperature["temp"]) + "degrees celcius. There is a humidity of " + str(humidity) + "percent. It is" + str(finalweather))
+
         elif (result=="play" or result=="Play"):
             query = mymainr
             swords = ["play"]
@@ -212,29 +348,104 @@ def MyMain():
             for vid in soup.findAll(attrs={'class':'yt-uix-tile-link'}):
                 video = 'https://www.youtube.com' + vid['href']
                 ytlinks.append(video)
-            print(ytlinks[0])
-            ytlink = ytlinks[0]
+            try:
+               print(ytlinks[0])
+               ytlink = ytlinks[0]
             
-            video = pafy.new(ytlink)
-            best = video.getbest()
-            playurl = best.url
+               video = pafy.new(ytlink)
+               best = video.getbest()
+               playurl = best.url
 
-            Instance = vlc.Instance()
-            player = Instance.media_player_new()
-            Media = Instance.media_new(playurl)
-            Media.get_mrl()
-            player.set_media(Media)
-            player.play()
+               Instance = vlc.Instance()
+               player = Instance.media_player_new()
+               Media = Instance.media_new(playurl)
+               Media.get_mrl()
+               player.set_media(Media)
+               player.play()
+            except:
+               tts.say("Please be more specific. Maybe tell me an author or something more.")
+               
+        elif (result=="set the alarm at" or result=="set alarm at" or result=="set an alarm at"):
+           stopwords = ["o'clock", "oclock", "sharp", "set the alarm at", "set alarm at", "set an alarm at"]
+           resultwords  = [word for word in querywords if word.lower() not in stopwords]
+           result = ' '.join(resultwords)
+           hoursstr = result[0:2]
+           hoursalmostfinal = hoursstr.replace(":", "")
+           minstr = result[2:4]
+           finalresultm = strtoint.StrToInt(minstr)
+           finalresulth = strtoint.StrToInt(hoursalmostfinal)
+           
+           if (len(alarm1) == 0):
+              alarm1.append(finalresulth)
+              alarm1.append(finalresultm)
+           else:
+              if (len(alarm2) == 0):
+                 alarm2.append(finalresulth)
+                 alarm2.append(finalresultm)
+              else:
+                 if (len(alarm3) == 0):
+                    alarm3.append(finalresulth)
+                    alarm3.append(finalresultm)
+                 else:
+                    tts.say("All my alarm capabilities are full.")
+           
+        elif result=="set the timer for" or result=="set a timer for":   # Timer
+           stopwords = ["set the timer for", "set a timer for"]
+           resultwords  = [word for word in querywords if word.lower() not in stopwords]
+           result = ' '.join(resultwords)
+           timestr = result[0:2]
+           timesetstr = result[2:]
+           if timesetstr=="hour" or timesetstr=="hours":
+              if timestr[1] == " ":
+                 timeint = strtoint.StrToInt(timestr[1])
+                 timefinal = timeint * 60 * 60
+                 thread.start_new_thread(Timer, (timefinal))
+              else:
+                 timeint = strtoint.StrToInt(timestr)
+                 timefinal = timeint * 60 * 60
+                 thread.start_new_thread(Timer, (timefinal))
+           elif timesetstr=="minute" or timesetstr=="minutes":
+              if timestr[1] == " ":
+                 timeint = strtoint.StrToInt(timestr[1])
+                 timefinal = timeint * 60
+                 thread.start_new_thread(Timer, (timefinal))
+              else:
+                 timeint = strtoint.StrToInt(timestr)
+                 timefinal = timeint * 60
+                 thread.start_new_thread(Timer, (timefinal))
+           elif timesetstr=="second" or timesetstr=="seconds":
+              if timestr[1] == " ":
+                 timeint = strtoint.StrToInt(timestr[1])
+                 timefinal = timeint
+                 thread.start_new_thread(Timer, (timefinal))
+              else:
+                 timeint = strtoint.StrToInt(timestr)
+                 timefinal = timeint
+                 thread.start_new_thread(Timer, (timefinal))
+           elif timesetstr=="day" or timesetstr=="days":
+              if timestr[1] == " ":
+                 timeint = strtoint.StrToInt(timestr[1])
+                 timefinal = timeint * 24 * 60 * 60
+                 thread.start_new_thread(Timer, (timefinal))
+              else:
+                 timeint = strtoint.StrToInt(timestr)
+                 timefinal = timeint * 24 * 60 * 60
+                 thread.start_new_thread(Timer, (timefinal))
+
         else:
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
             result = ' '.join(resultwords)
             print(result)
             
-            summary = wikipedia.summary(result, sentences=1)
-            filteredtext = wpfilter1.removeunwanted(summary)
-            print(filteredtext)
-            print(summary)
-            tts.say(str(filteredtext))
+            try:
+               summary = wikipedia.summary(result, sentences=1)
+               filteredtext = wpfilter1.removeunwanted(summary)
+               print(filteredtext)
+               final = filteredtext.encode("utf8")
+               print(summary)
+               tts.say(str(final))
+            except:
+               tts.say("Sorry, but I cannot tell you that, because a bug in my code.")
         
 
 with m as source:
@@ -248,40 +459,19 @@ def checkForWord(recognizer, audio):
             My = True
             print("I'm listening")
             MyMain()
-        elif wordCheck == "ok my":
+        elif wordCheck == "ok my" or wordCheck=="okay my" or wordCheck=="o. k. my":
             My = True
             MyMain()
-        elif wordCheck == "okay my":
+        elif wordCheck == "hey mike" or wordCheck=="hey Mike":
             My = True
             MyMain()
-        elif wordCheck == "o. k. my":
+        elif wordCheck == "o. k. why" or wordCheck=="okay why":
             My = True
             MyMain()
-        elif wordCheck == "hey mike":
+        elif wordCheck == "o. k. mind" or wordCheck=="okay mind":
             My = True
             MyMain()
-        elif wordCheck == "hey Mike":
-            My = True
-            MyMain()
-        elif wordCheck == "o. k. why":
-            My = True
-            MyMain()
-        elif wordCheck == "okay why":
-            My = True
-            MyMain()
-        elif wordCheck == "o. k. mind":
-            My = True
-            MyMain()
-        elif wordCheck == "okay mind":
-            My = True
-            MyMain()
-        elif wordCheck == "okay Mike":
-            My = True
-            MyMain()
-        elif wordCheck == "o. k. Mike":
-            My = True
-            MyMain()
-        elif wordCheck == "okay mike":
+        elif wordCheck == "okay Mike" or wordCheck=="ok Mike" or wordCheck=="o. k. Mike" or wordCheck=="okay mike":
             My = True
             MyMain()
         elif wordCheck == "pay my":
@@ -299,13 +489,28 @@ def checkForWord(recognizer, audio):
         elif wordCheck == "wake up Mike":
             My = True
             MyMain()
+        elif wordCheck == "yo My" or wordCheck=="yo my" or wordCheck=="Yo My" or wordCheck=="Yo my":
+            My = True
+            MyMain()
+        elif wordCheck == "stop":
+           global stopwatch
+           if stopwatch == True:
+              global stopwatchTime
+              stopwatch == False
+              tts.say("Time: " + str(stopwatchTime) + "seconds")
+              stopwatchTime = 0
+              
     except sr.UnknownValueError:
         print("I cannot understand you! Try again! If I don't understand you anymore, try to power me off!")
     except sr.RequestError as e:
         print("Recognition failed; {0}".format(e))
 
-while My == False:
-    with sr.Microphone() as source:
-        print("Say something!")
-        audio = r.listen(source)
-    checkForWord(r, audio)
+def MyRecognition():
+   while My == False:
+      with sr.Microphone() as source:
+         print("Say something!")
+         audio = r.listen(source)
+      checkForWord(r, audio)
+
+thread.start_new_thread(RTCwithAlarm, ())
+thread.start_new_thread(MyRecognition, ())
