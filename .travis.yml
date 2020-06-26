@@ -12,6 +12,7 @@ install:
   - pip install pafy
   - pip install bs4
   - pip install youtube-dl
+  - cd ~/Desktop
   - touch OWM_license.txt
 # command to run tests
 script:
