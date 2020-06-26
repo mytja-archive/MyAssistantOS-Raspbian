@@ -65,7 +65,7 @@ Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
 ------------------ | :----------: | :----------: | :---------: | -----
 Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
 Raspbian           |      ✔       |             |            | We tested only Guinea pig 1.0
-Linux              |              |             |      ✔     | 
+Debian              |              |             |      ✔     | 
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 
 macOS              |              |             |      ✔     | 
@@ -120,4 +120,5 @@ Just say "what's the time" or "what's the date" and he will answer you
 
 # Pick a number game
 *This game is not functional as first tests showed us! We will continue to resolve it and hopefuly with stable/LTS 1.1, we will fix it*
+
 Just say pick a number and guess numbers. Tell him only number, not "is it ....".
