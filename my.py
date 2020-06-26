@@ -123,6 +123,24 @@ def Timer(seconds):
    while timer==True:
       time.sleep(1)
       timerTime = timerTime - 1
+      print(timerTime)
+      print(timer)
+      if timerTime == 0:
+         tts.say("Stop!")
+         timer = False
+         
+def Countdown():
+   tts.say("5")
+   time.sleep(1)
+   tts.say("4")
+   time.sleep(1)
+   tts.say("3")
+   time.sleep(1)
+   tts.say("2")
+   time.sleep(1)
+   tts.say("1")
+   time.sleep(1)
+   tts.say("Start")
 
 def Stopwatch():
    global stopwatch
@@ -147,6 +165,12 @@ def StopwatchStartup():
    tts.say("Start")
    stopwatch = True
    thread.start_new_thread(Stopwatch, ())
+
+def TimerSetup(sec):
+   global timer
+   timer = True
+   thread.start_new_thread(Timer, (sec))
+   
 
 def recognitionMode(recognitionint):
     global InternetMode
@@ -226,7 +250,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Guinea pig 1.1")
+        tts.say("Beta 1.1")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -273,6 +297,7 @@ def MyMain():
        ltmon = lt.tm_mon
        ltday = lt.tm_mday
        ltdayofweek = lt.tm_wday
+       print(ltdayofweek)
        th = ""
        if (ltday=="21"):
           th = "twentyfirst"
@@ -288,6 +313,18 @@ def MyMain():
           th = "thirtythird"
        elif (ltday=="3"):
           th = "third"
+       elif (ltday=="5"):
+          th = "fifth"
+       elif (ltday=="15"):
+          th = "fifteenth"
+       elif (ltday=="25"):
+          th = "twentyfifth"
+       elif (ltday=="30"):
+          th = "thirtieth"
+       elif (ltday=="20"):
+          th = "twentieth"
+       else:
+          th = str(ltday) + "th"
           
        tts.say("It's " + daysOfTheWeek[ltdayofweek] + th + "Of" + monthsOfTheYear[ltmon-1] + str(lty))
     elif mymainr=="set the stopwatch" or mymainr=="set a stopwatch" or mymainr=="stopwatch":
@@ -299,9 +336,11 @@ def MyMain():
           tts.say("Time (in seconds): " + str(stopwatchTime))
     elif mymainr == "pick a number":
        PickANumberGame(randint(0, 10), 1)
+    elif mymainr=="countdown":
+       Countdown()
     else:
         query = mymainr
-        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are", "play", "set the alarm at", "set alarm at", "set an alarm at", "set a stopwatch", "set the timer for", "set a timer for"]
+        stopwords = ['what','who','is','a','at','is','he', "who's", "what's", "the", "weather", "in", "like", "plus", "minus", "divided by", "times", "+", "-", "are", "play", "set the alarm at", "set alarm at", "set an alarm at", "set stopwatch", "set the timer for", "set", "timer", "for"]
         querywords = query.split() 
         resultwords  = [word for word in querywords if word.lower() in stopwords]
         result = ' '.join(resultwords)
@@ -399,38 +438,38 @@ def MyMain():
               if timestr[1] == " ":
                  timeint = strtoint.StrToInt(timestr[1])
                  timefinal = timeint * 60 * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
               else:
                  timeint = strtoint.StrToInt(timestr)
                  timefinal = timeint * 60 * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
            elif timesetstr=="minute" or timesetstr=="minutes":
               if timestr[1] == " ":
                  timeint = strtoint.StrToInt(timestr[1])
                  timefinal = timeint * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
               else:
                  timeint = strtoint.StrToInt(timestr)
                  timefinal = timeint * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
            elif timesetstr=="second" or timesetstr=="seconds":
               if timestr[1] == " ":
                  timeint = strtoint.StrToInt(timestr[1])
                  timefinal = timeint
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
               else:
                  timeint = strtoint.StrToInt(timestr)
                  timefinal = timeint
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
            elif timesetstr=="day" or timesetstr=="days":
               if timestr[1] == " ":
                  timeint = strtoint.StrToInt(timestr[1])
                  timefinal = timeint * 24 * 60 * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
               else:
                  timeint = strtoint.StrToInt(timestr)
                  timefinal = timeint * 24 * 60 * 60
-                 thread.start_new_thread(Timer, (timefinal))
+                 TimerSetup(timefinal)
 
         else:
             resultwords  = [word for word in querywords if word.lower() not in stopwords]
