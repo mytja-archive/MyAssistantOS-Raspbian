@@ -3,6 +3,11 @@
 
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
 
+Offical pages: [GitHub Pages](https://mytja.github.io/MyAssistantOS-Raspbian) - 
+[GitHub Repository](https://github.com/mytja/MyAssistantOS-Raspbian) - 
+[MyTja Offical page](https://mytja.000webhostapp.com) - 
+[Travis CI testment](https://travis-ci.org/github/mytja/MyAssistantOS-Raspbian)
+
 # What can I do?
 I can play your favorite music, offline and recognize offline. We can have a small chat (also offline). I can use multiple TTS engines. I can gather information from Wikipedia, give you a weather report, tell you a joke, sing you a lullaby, and most importantly, I do not spy on you. I can also play music and videos from Youtube. There is a lot of things that I can do. Since I'm quite new, I cannot understand properly or I may have a bug. If you see so, then please report on Issues tab on GitHub.
 
