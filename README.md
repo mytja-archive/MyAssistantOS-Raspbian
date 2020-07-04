@@ -1,5 +1,12 @@
 # MyAssistantOS-Raspbian
+![mytja-myassistantos-logo](https://user-images.githubusercontent.com/52399966/85886486-803c0680-b7e6-11ea-9e16-a1fd212c0f81.png)
+
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
+
+Offical pages: [GitHub Pages](https://mytja.github.io/MyAssistantOS-Raspbian) - 
+[GitHub Repository](https://github.com/mytja/MyAssistantOS-Raspbian) - 
+[MyTja Offical page](https://mytja.000webhostapp.com) - 
+[Travis CI testment](https://travis-ci.org/github/mytja/MyAssistantOS-Raspbian)
 
 # What can I do?
 I can play your favorite music, offline and recognize offline. We can have a small chat (also offline). I can use multiple TTS engines. I can gather information from Wikipedia, give you a weather report, tell you a joke, sing you a lullaby, and most importantly, I do not spy on you. I can also play music and videos from Youtube. There is a lot of things that I can do. Since I'm quite new, I cannot understand properly or I may have a bug. If you see so, then please report on Issues tab on GitHub.
@@ -65,7 +72,7 @@ Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
 ------------------ | :----------: | :----------: | :---------: | -----
 Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
 Raspbian           |      ✔       |             |            | We tested only Guinea pig 1.0
-Linux              |              |             |      ✔     | 
+Debian              |              |             |      ✔     | 
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 
 macOS              |              |             |      ✔     | 
@@ -107,3 +114,32 @@ Volume commands are
 - Minimum
 - Volume up/down
 - Medium volume
+
+# Timer, stopwatch, alarm and countdown
+*This features are partly tested*
+
+## Stopwatch
+You can use stopwatch by saying: Hey, My - Stopwatch
+
+## Timer
+*Timer doesn't work. We are developing new ways for timer*
+
+You can use timer by saying: Hey, My - Set a timer for XX seconds/minutes/hours/days
+
+## Countdown
+You can use countdown by saying: Hey, My - Countdown
+
+Countdown will automaticly countdown from 5 seconds
+
+## Alarm
+Recognition for alarm doesn't work the best, so we don't reccomend to use it!
+
+IMPORTANT NOTE: If you turn off your device, your alarms will delete!
+
+# Real time clock (RTC)
+Just say "what's the time" or "what's the date" and he will answer you
+
+# Pick a number game
+*This game is not functional as first tests showed us! We will continue to resolve it but LTS 1.1 won't solve it!*
+
+Just say pick a number and guess numbers. Tell him only number, not "is it ....".
