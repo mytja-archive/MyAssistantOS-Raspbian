@@ -11,6 +11,9 @@ install:
   - pip install python-vlc
   - pip install pafy
   - pip install bs4
+  - pip install youtube-dl
+  - chmod +x oobe
+  - ./oobe
 # command to run tests
 script:
   - python my.py
