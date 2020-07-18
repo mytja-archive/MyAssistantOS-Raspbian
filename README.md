@@ -3,10 +3,13 @@
 
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
 
-Offical pages: [GitHub Pages](https://mytja.github.io/MyAssistantOS-Raspbian) - 
-[GitHub Repository](https://github.com/mytja/MyAssistantOS-Raspbian) - 
-[MyTja Offical page](https://mytja.000webhostapp.com) - 
-[Travis CI testment](https://travis-ci.org/github/mytja/MyAssistantOS-Raspbian)
+Offical pages, useful links & linked repositories: 
+- [GitHub Pages](https://mytja.github.io/MyAssistantOS-Raspbian)
+- [GitHub Repository](https://github.com/mytja/MyAssistantOS-Raspbian)
+- [MyTja Offical page](https://mytja.000webhostapp.com)
+- [Travis CI testment](https://travis-ci.org/github/mytja/MyAssistantOS-Raspbian)
+- [SDK for MyAssistantOS Raspbian](https://github.com/mytja/MyAssistantOS-Raspbian-SDK)
+- [HAM Arduino(Home Automation with My for Arduino & ESP WiFi boards)](https://github.com/mytja/HAM-Arduino)
 
 # What can I do?
 I can play your favorite music, offline and recognize offline. We can have a small chat (also offline). I can use multiple TTS engines. I can gather information from Wikipedia, give you a weather report, tell you a joke, sing you a lullaby, and most importantly, I do not spy on you. I can also play music and videos from Youtube. There is a lot of things that I can do. Since I'm quite new, I cannot understand properly or I may have a bug. If you see so, then please report on Issues tab on GitHub.
@@ -33,6 +36,17 @@ pip install python-vlc
 pip install pafy
 pip install bs4
 ```
+But if you run command ./oobe, this will install libraries for you!
+
+# OOBE and OWM key
+*This part is talking about a feature, that isn't tested yet!*
+
+OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
+
+# LTS (Long Term Support)
+*This releases are new and patches will come*
+
+Long Term Support (LTS) release is a stable release, that is promoted to an LTS edition. Normaly, an LTS edition has 2 years of support, other releases end their support in 3 months from first publishing.
 
 # Install TTS engine
 That is one of the most difficult part if you use Windows. If you use Linux it is simple.
@@ -44,23 +58,74 @@ OWM is OpenWeatherMap. If you want My to tell you the weather, then you will nee
 Full tutorial is avaiable here: https://github.com/csparpa/pyowm
 Thanks to @csparpa
 
-Here you go! You are done!
+Here you go! You are done with basic part!
+
+# Customizing
+You can play offline your favorite song. Download it and rename it to "favorite" it is best to use mp3.
 
 # How to use me?
 You say: "Hey, My" or "O.K. My" or "Okay My" or "Wake up, My"
 
 If he senses that succesfully, then he will respond with beep beep sound. Then you say your question. But he doesn't know everything.
 
-# Play music and videos from YouTube
+# Programming language
+I'm based on Python.
+Python 2 is already installed on Raspbian.
+
+# Features
+
+## Play music and videos from YouTube
+*This part is currently problematic, since YouTube changed some of its parameters and doesn't work in releases until LTS1.1p1 (LTS 1.1 patch 1)*
+
 Thanks to VLC for Python, pafy and BeautifulSoup we can play music and video from YouTube. You just say "play <your video name>". He will choose first result so be very detailed.
 
-# Customizing
-You can play offline your favorite song. Download it and rename it to "favorite" it is best to use mp3.
-
-# Offline mode
+## Offline mode
 *This feature is new and tested*
 
 Offline mode is only for chat and some music. My uses as offline speech recognition service Sphinx. It doesn't recognize the best, but it certanly tries.
+
+## Check for updates
+_This part is talking about new feature, that was not tested._
+
+You can check for updates with 2 different ways:
+1. Reboot My (tested way)
+2. Say "check for updates" or "update" (new feature that is not yet tested)
+
+## Volume commands
+Volume commands are
+- Maximum
+- Minimum
+- Volume up/down
+- Medium volume
+
+## Timer, stopwatch, alarm and countdown
+*This features are partly tested*
+
+### Stopwatch
+You can use stopwatch by saying: Hey, My - Stopwatch
+
+### Timer
+*Timer doesn't work. We are developing new ways for timer*
+
+You can use timer by saying: Hey, My - Set a timer for XX seconds/minutes/hours/days
+
+### Countdown
+You can use countdown by saying: Hey, My - Countdown
+
+Countdown will automaticly countdown from 5 seconds
+
+### Alarm
+Recognition for alarm doesn't work the best, so we don't reccomend to use it!
+
+IMPORTANT NOTE: If you turn off your device, your alarms will delete!
+
+## Real time clock (RTC)
+Just say "what's the time" or "what's the date" and he will answer you
+
+## Pick a number game
+*This game is not functional as first tests showed us! We will continue to resolve it but LTS 1.1 won't solve it!*
+
+Just say pick a number and guess numbers. Tell him only number, not "is it ....".
 
 # Testing & Compatibility
 
@@ -86,60 +151,3 @@ DLL files are included, because during the testing I had some problems with dll 
 THIS DLL FILES ARE NOT DEVELOPED BY MyTja AND THEY MIGHT NOT BE COMPATIBLE WITH YOUR DEVICE!!! USE THEM AT YOUR OWN RISK!!! FILES ARE SCANNED WITH VIRUSTOTAL AND WITH LATEST RELEASE DO NOT COME WITH ANY MALWARE!!!!
 
 You can get DLL files in dll branch.
-
-# Programming language
-I'm based on Python.
-Python 2 is already installed on Raspbian.
-
-# Check for updates
-_This part is talking about new feature, that was not tested._
-
-You can check for updates with 2 different ways:
-1. Reboot My (tested way)
-2. Say "check for updates" or "update" (new feature that is not yet tested)
-
-# OOBE and OWM key
-*This part is talking about a feature, that isn't released yet, or is in early publishment phase*
-
-OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
-
-# LTS (Long Term Support)
-*This part is talking about special LTS releases, that aren't published yet*
-
-Long Term Support (LTS) release is a stable release, that is promoted to an LTS edition. Normaly, an LTS edition has 2 years of support, other releases end their support in 3 months from first publishing.
-
-# Volume commands
-Volume commands are
-- Maximum
-- Minimum
-- Volume up/down
-- Medium volume
-
-# Timer, stopwatch, alarm and countdown
-*This features are partly tested*
-
-## Stopwatch
-You can use stopwatch by saying: Hey, My - Stopwatch
-
-## Timer
-*Timer doesn't work. We are developing new ways for timer*
-
-You can use timer by saying: Hey, My - Set a timer for XX seconds/minutes/hours/days
-
-## Countdown
-You can use countdown by saying: Hey, My - Countdown
-
-Countdown will automaticly countdown from 5 seconds
-
-## Alarm
-Recognition for alarm doesn't work the best, so we don't reccomend to use it!
-
-IMPORTANT NOTE: If you turn off your device, your alarms will delete!
-
-# Real time clock (RTC)
-Just say "what's the time" or "what's the date" and he will answer you
-
-# Pick a number game
-*This game is not functional as first tests showed us! We will continue to resolve it but LTS 1.1 won't solve it!*
-
-Just say pick a number and guess numbers. Tell him only number, not "is it ....".
