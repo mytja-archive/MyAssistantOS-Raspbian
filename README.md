@@ -75,7 +75,7 @@ Python 2 is already installed on Raspbian.
 # Features
 
 ## Play music and videos from YouTube
-*This part is currently problematic, since YouTube changed some of its parameters and doesn't work in releases until LTS1.1p1 (LTS 1.1 patch 1)*
+*This part is currently problematic, and YouTube playing won't work as normal. It won't always play your video! We are working on this. More info: https://github.com/mytja/MyAssistantOS-Raspbian/issues/41*
 
 Thanks to VLC for Python, pafy and BeautifulSoup we can play music and video from YouTube. You just say "play <your video name>". He will choose first result so be very detailed.
 
