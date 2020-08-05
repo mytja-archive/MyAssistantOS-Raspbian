@@ -151,3 +151,8 @@ DLL files are included, because during the testing I had some problems with dll 
 THIS DLL FILES ARE NOT DEVELOPED BY MyTja AND THEY MIGHT NOT BE COMPATIBLE WITH YOUR DEVICE!!! USE THEM AT YOUR OWN RISK!!! FILES ARE SCANNED WITH VIRUSTOTAL AND WITH LATEST RELEASE DO NOT COME WITH ANY MALWARE!!!!
 
 You can get DLL files in dll branch.
+
+# Transition to Python 3
+As of 1st January 2020, Python 2 is unsupported. Most of our libraries are unsupported. Since YouTube is making some changes to its platform, it is very hard to maintain by ourselfs. As of version 1.2, our platform will be completelly moved to Python 3 and Python 2 releases (except LTS 1.1) will become unsupported.
+
+Watch for updates here: #43
