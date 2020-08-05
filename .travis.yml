@@ -15,3 +15,4 @@ install:
   - chmod +x oobe
 # command to run tests
 script:
+  - pip install gtts
