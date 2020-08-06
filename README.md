@@ -49,6 +49,8 @@ OOBE will automaticly create txt file called "OWM_license.txt", which will be fi
 Long Term Support (LTS) release is a stable release, that is promoted to an LTS edition. Normaly, an LTS edition has 2 years of support, other releases end their support in 3 months from first publishing.
 
 # Install TTS engine
+*Talkey will be depricated with version 1.2, and we will move to gTTS and our gTTS wrapper*
+
 That is one of the most difficult part if you use Windows. If you use Linux it is simple.
 Full tutorial is avaiable here: https://github.com/grigi/talkey
 Thanks to @grigi.
@@ -155,4 +157,4 @@ You can get DLL files in dll branch.
 # Transition to Python 3
 As of 1st January 2020, Python 2 is unsupported. Most of our libraries are unsupported. Since YouTube is making some changes to its platform, it is very hard to maintain by ourselfs. As of version 1.2, our platform will be completelly moved to Python 3 and Python 2 releases (except LTS 1.1) will become unsupported.
 
-Watch for updates here: #43
+Watch for updates here: https://github.com/mytja/MyAssistantOS-Raspbian/issues/43
