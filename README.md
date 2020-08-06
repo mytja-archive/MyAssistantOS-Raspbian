@@ -1,6 +1,8 @@
 # MyAssistantOS-Raspbian
 ![mytja-myassistantos-logo](https://user-images.githubusercontent.com/52399966/85886486-803c0680-b7e6-11ea-9e16-a1fd212c0f81.png)
 
+## *With 1.2, we will move all codes to Python 3, since many libraries and also Python 2 is unsupported. Things in this manual will change a lot. We will also release LTS1.1p1, which will be last version that will support Python 2. It will be modified to not update itself. It won't be moved to master branch! Hope you understand! mytja*
+
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
 
 Offical pages, useful links & linked repositories: 
