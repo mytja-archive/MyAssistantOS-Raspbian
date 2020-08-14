@@ -1,6 +1,6 @@
 cd ~/Desktop
 rm -rf MyAssistantOS-Raspbian
-git clone https://github.com/mytja/MyAssistantOS-Raspbian/
+git clone -branch LTS1.1p1 https://github.com/mytja/MyAssistantOS-Raspbian/
 cd MyAssistantOS-Raspbian
 chmod +x updater
 mv updater ~/Desktop/
@@ -15,9 +15,10 @@ python -m pip install PyAudio --user
 python -m pip install wikipedia --user
 python -m pip install playsound --user
 python -m pip install vlc --user
-python -m pip install bs4 --user
 python -m pip install urllib --user
 python -m pip install pafy --user
+python -m pip install youtube-search-python --user
+python -m pip install youtube-dl --user
 cd ~/Desktop
 touch OWM_license.txt
 cd MyAssistantOS-Raspbian
