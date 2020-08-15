@@ -1,4 +1,4 @@
-﻿import speech_recognition as sr
+import speech_recognition as sr
 import time
 import pyaudio
 from playsound import playsound
@@ -6,7 +6,6 @@ import gTTSwrapper as tts
 from random import randint, choice
 import wikipedia
 import pyowm
-import urllib
 import pafy
 import vlc
 import os
@@ -89,6 +88,7 @@ def redirectPickANumber(number, trial):
    tts.say("Try again")
    PickANumberGame(number, trial+1)
    
+
 def PickANumberGame(number, trial):  # Currently defective - still in production
    with sr.Microphone() as source:
       playsound('media/beep_my.wav')
@@ -503,6 +503,7 @@ def checkForWord(recognizer, audio):
         print(wordCheck)
         if wordCheck == "hey my":
             My = True
+            
             MyMain()
         elif wordCheck == "ok my" or wordCheck=="okay my" or wordCheck=="o. k. my":
             My = True
