@@ -1,18 +1,19 @@
-﻿import speech_recognition as sr
+# coding: utf-8
+
+import speech_recognition as sr
 import time
-# import pyaudio
+import pyaudio
 from playsound import playsound
-import talkey
+import gTTSwrapper as tts
 from random import randint, choice
 import wikipedia
 import pyowm
-import urllib
-from bs4 import BeautifulSoup
 import pafy
 import vlc
 import os
-import StrToInt as strtoint
-import thread
+import StringToInteger as strtoint
+import _thread as thread
+from youtubesearchpython import searchYoutube
 
 alarm1 = []
 alarm2 = []
@@ -30,15 +31,17 @@ def RTCwithAlarm():                # Some functions are not in use and will be u
       year = lt.tm_year
       minute = lt.tm_min
       hour = lt.tm_hour
-      if (hour == alarm1 and minute < (alarm[1] + 03)):
+      if (hour == alarm1 and minute < (alarm[1] + 3)):
          playsound("media/alarm.wav")
-      if (hour == alarm2 and minute < 03):
+      if (hour == alarm2 and minute < 3):
          playsound("media/alarm.wav")
-      if (hour == alarm3 and minute < 03):
+      if (hour == alarm3 and minute < 3):
          playsound("media/alarm.wav")
 
 stopwatch = False
 stopwatchTime = 0
+
+playerOnline = False
 
 timer = False
 timerTime = 0
@@ -47,20 +50,20 @@ InternetMode = 1
 
 myalarm = True
 
-owmlicense = open("~/Desktop/OWM_license.txt", "r")
+owmlicense = open("/home/pi/Desktop/OWM_license.txt", "r")
 owmlicensekey = owmlicense.read()
 print(owmlicensekey)
 
-owm = pyowm.OWM(str(owmlicensekey), subscription_type="free") # Here you can change your subscription to OWM and API
+owm = pyowm.OWM(str(owmlicensekey)) # Here you can change your subscription to OWM and API
 
 jokelist = ["What's the best thing about Switzerland? I don't know, but the flag is a big plus",
             "Hear about the new restaurant called Karma? There is no menu. You get what you deserve",
             "I dreamed I was forced to eat a giant marshmallow. When I woke up, my pillow was gone.",
             "Mom, where do tampons go? -Where the babies come from, darling. In the stork?",
-            "Husband: Wow, honey, you look really different today. Did you do something to your hair? -Wife: Michael, I’m over here!",
-            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn’t try milking it.",
+            "Husband Wow, honey, you look really different today. Did you do something to your hair? -Wife Michael, I'm over here!",
+            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn't try milking it.",
             "Tonight I dreamt of a beautiful walk on a sandy beach. -At least that explains the footprints I found in the cat litter box this morning.",
-            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard…. really? That is so sweet of you! -You need plastic surgery."
+            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard... really? That is so sweet of you! -You need plastic surgery."
             ]
 
 My = False
@@ -69,8 +72,6 @@ My = False
 
 r = sr.Recognizer()
 m = sr.Microphone()
-
-tts = talkey.Talkey()
 
 class wpfilter(object):
    def removeunwanted(self, s):
@@ -192,6 +193,7 @@ def yesOrNo():                                      # Not in use
         tts.say("Ok. Switching to offline mode")
 
 def MyMain():
+    print("I'm listening!")
     with sr.Microphone() as source:
         playsound('media/beep_my.wav')
         print("I'm listening!")
@@ -250,7 +252,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Beta 1.1")
+        tts.say("Beta 1.2")
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -330,10 +332,24 @@ def MyMain():
     elif mymainr=="set the stopwatch" or mymainr=="set a stopwatch" or mymainr=="stopwatch":
        StopwatchStartup()
     elif mymainr=="stop":
+       global playerOnline
        global stopwatch
        if (stopwatch==True):
           stopwatch = False
           tts.say("Time (in seconds): " + str(stopwatchTime))
+       if (playerOnline==True):
+          player.stop()
+          playerOnline = False
+    elif mymainr=="pause":
+       #global playerOnline
+       if (playerOnline==True):
+          player.pause()
+          playerOnline = False
+    elif mymainr=="continue":
+       #global playerOnline
+       if (playerOnline==False):
+          player.play()
+          playerOnline = True
     elif mymainr == "pick a number":
        PickANumberGame(randint(0, 10), 1)
     elif mymainr=="countdown":
@@ -379,30 +395,23 @@ def MyMain():
             print(result)
             ytlinks = []
             textToSearch = result
-            query = urllib.quote_plus(textToSearch)
-            url = "https://www.youtube.com/results?search_query=" + query
-            response = urllib.urlopen(url)
-            html = response.read()
-            soup = BeautifulSoup(html, 'html.parser')
-            for vid in soup.findAll(attrs={'class':'yt-uix-tile-link'}):
-                video = 'https://www.youtube.com' + vid['href']
-                ytlinks.append(video)
-            try:
-               print(ytlinks[0])
-               ytlink = ytlinks[0]
-            
-               video = pafy.new(ytlink)
-               best = video.getbest()
-               playurl = best.url
+            search = searchYoutube(textToSearch, offset = 1, mode = "dict", max_results = 1)
+            result = search.result()["search_result"]
+            for video in result:
+               vid = video["link"]
+            video = pafy.new(vid)
+            best = video.getbest()
+            playurl = best.url
 
-               Instance = vlc.Instance()
-               player = Instance.media_player_new()
-               Media = Instance.media_new(playurl)
-               Media.get_mrl()
-               player.set_media(Media)
-               player.play()
-            except:
-               tts.say("Please be more specific. Maybe tell me an author or something more.")
+            Instance = vlc.Instance()
+            player = Instance.media_player_new()
+            Media = Instance.media_new(playurl)
+            Media.get_mrl()
+            player.set_media(Media)
+            playerOnline = True
+            player.play()
+            
+               #tts.say("Please be more specific. Maybe tell me an author or something more.")
                
         elif (result=="set the alarm at" or result=="set alarm at" or result=="set an alarm at"):
            stopwords = ["o'clock", "oclock", "sharp", "set the alarm at", "set alarm at", "set an alarm at"]
@@ -496,7 +505,7 @@ def checkForWord(recognizer, audio):
         print(wordCheck)
         if wordCheck == "hey my":
             My = True
-            print("I'm listening")
+            
             MyMain()
         elif wordCheck == "ok my" or wordCheck=="okay my" or wordCheck=="o. k. my":
             My = True
@@ -547,7 +556,7 @@ def checkForWord(recognizer, audio):
 def MyRecognition():
    while My == False:
       with sr.Microphone() as source:
-         print("Say something!")
+         print("Say one of my keywords!")
          audio = r.listen(source)
       checkForWord(r, audio)
 

@@ -7,17 +7,18 @@ mv updater ~/Desktop/
 sudo apt-get install festival
 sudo apt install python-pip
 chmod +x fix_oobe
-python -m pip install SpeechRecognition --user
-python -m pip install talkey --user
-python -m pip install pyowm --user
-python -m pip install PocketSphinx --user
-python -m pip install PyAudio --user
-python -m pip install wikipedia --user
-python -m pip install playsound --user
-python -m pip install vlc --user
-python -m pip install bs4 --user
-python -m pip install urllib --user
-python -m pip install pafy --user
+python3 -m pip install SpeechRecognition --user
+python3 -m pip install pyowm --user
+python3 -m pip install PocketSphinx --user
+python3 -m pip install PyAudio --user
+python3 -m pip install wikipedia --user
+python3 -m pip install playsound --user
+python3 -m pip install python-vlc --user
+python3 -m pip install pafy --user
+python3 -m pip install gTTS --user
+python3 -m pip install youtube-search-python --user
+python3 -m pip install StringToInteger --user
+python3 -m pip install youtube-dl --user
 cd ~/Desktop
 touch OWM_license.txt
 cd MyAssistantOS-Raspbian
