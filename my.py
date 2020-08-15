@@ -58,10 +58,10 @@ jokelist = ["What's the best thing about Switzerland? I don't know, but the flag
             "Hear about the new restaurant called Karma? There is no menu. You get what you deserve",
             "I dreamed I was forced to eat a giant marshmallow. When I woke up, my pillow was gone.",
             "Mom, where do tampons go? -Where the babies come from, darling. In the stork?",
-            "Husband: Wow, honey, you look really different today. Did you do something to your hair? -Wife: Michael, I’m over here!",
-            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn’t try milking it.",
+            "Husband Wow, honey, you look really different today. Did you do something to your hair? -Wife Michael, I'm over here!",
+            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn't try milking it.",
             "Tonight I dreamt of a beautiful walk on a sandy beach. -At least that explains the footprints I found in the cat litter box this morning.",
-            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard…. really? That is so sweet of you! -You need plastic surgery."
+            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard... really? That is so sweet of you! -You need plastic surgery."
             ]
 
 My = False
