@@ -1,3 +1,8 @@
+os:
+  - linux
+    dist: bionic
+  - windows
+  - osx
 language: python
 python:
   - "2.7"
@@ -12,7 +17,6 @@ install:
   - pip install pafy
   - pip install bs4
   - pip install youtube-dl
-  - chmod +x oobe
 # command to run tests
 script:
   - pip install gtts
