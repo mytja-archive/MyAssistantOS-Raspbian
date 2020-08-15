@@ -6,7 +6,6 @@ import gTTSwrapper as tts
 from random import randint, choice
 import wikipedia
 import pyowm
-import urllib
 import pafy
 import vlc
 import os
