@@ -1,4 +1,4 @@
-﻿import speech_recognition as sr
+import speech_recognition as sr
 import time
 import pyaudio
 from playsound import playsound
