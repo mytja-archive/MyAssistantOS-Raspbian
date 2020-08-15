@@ -13,8 +13,7 @@ python3 -m pip install PocketSphinx --user
 python3 -m pip install PyAudio --user
 python3 -m pip install wikipedia --user
 python3 -m pip install playsound --user
-python3 -m pip install vlc --user
-python3 -m pip install urllib --user
+python3 -m pip install python-vlc --user
 python3 -m pip install pafy --user
 python3 -m pip install gTTS --user
 python3 -m pip install youtube-search-python --user
