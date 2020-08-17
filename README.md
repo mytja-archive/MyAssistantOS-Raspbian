@@ -37,6 +37,7 @@ pip install python-vlc
 pip install pafy
 pip install youtube-search-python
 pip install youtube-dl
+pip install StringToInteger
 ```
 But if you run command ./oobe, this will install libraries for you!
 
