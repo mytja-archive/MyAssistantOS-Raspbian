@@ -134,7 +134,7 @@ Here is a compatibility table:
 Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
 ------------------ | :----------: | :----------: | :---------: | -----
 Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
-Raspbian           |      ✔       |             |            | We tested only Guinea pig 1.0
+Raspbian           |      ✔       |             |            | We are slowly testing 1.2, 1.3 should be fully tested
 Debian              |              |             |      ✔     | 
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 
