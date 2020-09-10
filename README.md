@@ -42,8 +42,6 @@ pip install StringToInteger
 But if you run command ./oobe, this will install libraries for you!
 
 # OOBE and OWM key
-*This part is talking about a feature, that isn't tested yet!*
-
 OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
 
 # LTS (Long Term Support)
