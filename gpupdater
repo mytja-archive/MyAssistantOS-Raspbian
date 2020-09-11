@@ -1,0 +1,8 @@
+cd ~/Desktop
+rm -rf MyAssistantOS-Raspbian
+git clone --branch guineapig https://github.com/mytja/MyAssistantOS-Raspbian/
+mv MyAssistantOS-Raspbian-guineapig MyAssistantOS-Raspbian
+cd MyAssistantOS-Raspbian
+mv gpupdater /home/pi/Desktop/
+cd /home/pi/Desktop/
+mv gpupdater updater
