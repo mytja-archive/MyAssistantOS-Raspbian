@@ -126,6 +126,8 @@ Just say pick a number and guess numbers. Tell him only number, not "is it ...."
 
 # Testing & Compatibility
 
+## Compatibility
+
 If you could contribute with testing our software, that would be great. Write bugs and ideas in issues. I will respond as fast as possible. Thank you.
 
 Here is a compatibility table:
@@ -138,6 +140,19 @@ Debian              |              |             |      ✔     |
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 
 macOS              |              |             |      ✔     | 
+
+## Testing it on _______ machine
+This is how it goes!
+
+### Windows
+Follow instructions on this branch: https://github.com/mytja/MyAssistantOS-Raspbian/tree/batches/
+
+### Raspbian as virtual machine
+I recommend QEMU as emulator, since VirtualBox and VMware, can't emulate ARM32 arhitecture.
+
+You can also use QiEmu (GUI QEMU emulator)
+
+I find this article very useful: https://www.how2shout.com/how-to/how-to-set-up-virtual-machines-with-qemu-gui-on-windows-10.html
 
 # DLL Files
 
