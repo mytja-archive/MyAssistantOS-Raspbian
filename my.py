@@ -13,10 +13,13 @@ import os
 import StringToInteger as strtoint
 import _thread as thread
 from youtubesearchpython import searchYoutube
+import updateChecker as uc
 
 alarm1 = []
 alarm2 = []
 alarm3 = []
+
+version = "guinea_1.2.2"
 
 daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -176,20 +179,20 @@ def recognitionMode(recognitionint):
     global InternetMode
     InternetMode = recognitionint
 
-def yesOrNo():                                      # Not in use
+def yesOrNo(toAsk):
     with sr.Microphone() as source:
         playsound('media/beep_my.wav')
         print("I'm listening!")
         audio = r.listen(source)
     recognition = r.recognize_google(audio)
+    tts.say(toAsk)
     if recognition=="yes":
-        InternetMode = 1
         My = False
-        tts.say("Ok. Switching to online mode")
+        return "yes"
     else:
-        InternetMode = 0
         My = False
-        tts.say("Ok. Switching to offline mode")
+        return "no"
+        
 
 def MyMain():
     print("I'm listening!")
@@ -251,7 +254,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Guinea pig 1.2")
+        tts.say(version)
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -269,8 +272,19 @@ def MyMain():
     elif mymainr=="reboot":
         os.system("sudo reboot")
     elif mymainr=="check for updates" or mymainr=="check for system updates" or mymainr=="update" or mymainr=="update your software":
-        os.system("./update-from-my")
-        kill-this-process() #this kills the process of My, because this function doesn't exist
+        uccheck = uc.checkForVersion("stable", version)
+        for item in uccheck:
+           updateAvaiable = item["update"]
+           desc = item["description"]
+        if (updateAvaiable=="y"):
+           assembly = "There is a new release avaiable" + str(description) + "Would you like to install it"
+           yn = yesOrNo(assembly)
+           if (yn == "yes"):
+              tts.say("Okay! Let's do it!")
+              os.system("cd /home/pi/Desktop/ && ./updater")
+              kill-this-process() #this kills the process of My, because this function doesn't exist
+           else:
+              tts.say("Okay, aborting mission")
         My = False
     elif mymainr=="higher volume" or mymainr=="louder" or mymainr=="volume up":
         os.system("cd /home/pi/Desktop/ && vol +")
