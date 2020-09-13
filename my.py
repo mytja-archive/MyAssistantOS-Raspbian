@@ -19,7 +19,7 @@ alarm1 = []
 alarm2 = []
 alarm3 = []
 
-version = "beta_1.2.2"
+version = "v1.2.2"
 
 daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
