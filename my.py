@@ -1,5 +1,3 @@
-# coding: utf-8
-
 import speech_recognition as sr
 import time
 import pyaudio
@@ -8,16 +6,20 @@ import gTTSwrapper as tts
 from random import randint, choice
 import wikipedia
 import pyowm
+import urllib
 import pafy
 import vlc
 import os
 import StringToInteger as strtoint
 import _thread as thread
 from youtubesearchpython import searchYoutube
+import updateChecker as uc
 
 alarm1 = []
 alarm2 = []
 alarm3 = []
+
+version = "beta_1.2.2"
 
 daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -50,7 +52,7 @@ InternetMode = 1
 
 myalarm = True
 
-owmlicense = open("/home/pi/Desktop/OWM_license.txt", "r")
+owmlicense = open("/home/pi/Desktop/apikeys/OWM_license.txt", "r")
 owmlicensekey = owmlicense.read()
 print(owmlicensekey)
 
@@ -60,10 +62,10 @@ jokelist = ["What's the best thing about Switzerland? I don't know, but the flag
             "Hear about the new restaurant called Karma? There is no menu. You get what you deserve",
             "I dreamed I was forced to eat a giant marshmallow. When I woke up, my pillow was gone.",
             "Mom, where do tampons go? -Where the babies come from, darling. In the stork?",
-            "Husband Wow, honey, you look really different today. Did you do something to your hair? -Wife Michael, I'm over here!",
-            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn't try milking it.",
+            "Husband: Wow, honey, you look really different today. Did you do something to your hair? -Wife: Michael, I’m over here!",
+            "What do you get when you cross-breed a shark and a cow? -I have no idea but I wouldn’t try milking it.",
             "Tonight I dreamt of a beautiful walk on a sandy beach. -At least that explains the footprints I found in the cat litter box this morning.",
-            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard... really? That is so sweet of you! -You need plastic surgery."
+            "Wait for me honey, I’m just finishing my make-up. -You don’t need make-up, Jane. -Oh, Richard…. really? That is so sweet of you! -You need plastic surgery."
             ]
 
 My = False
@@ -177,20 +179,20 @@ def recognitionMode(recognitionint):
     global InternetMode
     InternetMode = recognitionint
 
-def yesOrNo():                                      # Not in use
+def yesOrNo(toAsk):
     with sr.Microphone() as source:
         playsound('media/beep_my.wav')
         print("I'm listening!")
         audio = r.listen(source)
     recognition = r.recognize_google(audio)
+    tts.say(toAsk)
     if recognition=="yes":
-        InternetMode = 1
         My = False
-        tts.say("Ok. Switching to online mode")
+        return "yes"
     else:
-        InternetMode = 0
         My = False
-        tts.say("Ok. Switching to offline mode")
+        return "no"
+        
 
 def MyMain():
     print("I'm listening!")
@@ -252,7 +254,7 @@ def MyMain():
         tts.say("Electricity.")
         My = False
     elif mymainr=="version":
-        tts.say("Beta 1.2")
+        tts.say(version)
         My = False
     elif mymainr=="what's your favorite food" or mymainr=="what is your favorite food":
         tts.say("I like pizza.")
@@ -266,27 +268,43 @@ def MyMain():
         recognitionMode(1)
         My = False
     elif mymainr=="power off" or mymainr=="shutdown" or mymainr=="shut down":
-        os.system("./poweroff")
+        os.system("sudo poweroff")
     elif mymainr=="reboot":
-        os.system("./reboot")
+        os.system("sudo reboot")
     elif mymainr=="check for updates" or mymainr=="check for system updates" or mymainr=="update" or mymainr=="update your software":
-        os.system("./update-from-my")
-        kill-this-process() #this kills the process of My, because this function doesn't exist
+        uccheck = uc.checkForVersion("stable", version)
+        for item in uccheck:
+           updateAvaiable = item["update"]
+           desc = item["description"]
+        if (updateAvaiable=="y"):
+           assembly = "There is a new release avaiable" + str(description) + "Would you like to install it"
+           yn = yesOrNo(assembly)
+           if (yn == "yes"):
+              tts.say("Okay! Let's do it!")
+              os.system("cd /home/pi/Desktop/ && ./updater")
+              kill-this-process() #this kills the process of My, because this function doesn't exist
+           else:
+              tts.say("Okay, aborting mission")
         My = False
     elif mymainr=="higher volume" or mymainr=="louder" or mymainr=="volume up":
-        os.system("./highervolume")
+        os.system("cd /home/pi/Desktop/ && vol +")
+        tts.say("Okay")
         My = False
     elif mymainr=="lower volume" or mymainr=="quieter" or mymainr=="volume down":
-        os.system("./lowervolume")
+        os.system("cd /home/pi/Desktop/ && vol -")
+        tts.say("Okay")
         My = False
     elif mymainr=="medium volume":
-        os.system("./mediumvolume")
+        os.system("cd /home/pi/Desktop/ && vol 50")
+        tts.say("Okay")
         My = False
     elif mymainr=="minimum volume" or mymainr=="minimum":
-        os.system("./minvolume")
+        os.system("cd /home/pi/Desktop/ && vol 0")
+        tts.say("Okay")
         My = False
     elif mymainr=="maximum volume" or mymainr=="maximum":
-        os.system("./maxvolume")
+        os.system("cd /home/pi/Desktop/ && vol 100")
+        tts.say("Okay")
         My = False
     elif mymainr=="what's the time" or mymainr=="what is the time":
        lt = time.localtime()
@@ -562,3 +580,4 @@ def MyRecognition():
 
 thread.start_new_thread(RTCwithAlarm, ())
 thread.start_new_thread(MyRecognition, ())
+
