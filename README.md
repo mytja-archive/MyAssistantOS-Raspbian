@@ -37,12 +37,11 @@ pip install python-vlc
 pip install pafy
 pip install youtube-search-python
 pip install youtube-dl
+pip install StringToInteger
 ```
 But if you run command ./oobe, this will install libraries for you!
 
 # OOBE and OWM key
-*This part is talking about a feature, that isn't tested yet!*
-
 OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
 
 # LTS (Long Term Support)
@@ -135,7 +134,7 @@ Here is a compatibility table:
 Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
 ------------------ | :----------: | :----------: | :---------: | -----
 Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
-Raspbian           |      ✔       |             |            | We tested only Guinea pig 1.0
+Raspbian           |      ✔       |             |            | We are slowly testing 1.2, 1.3 should be fully tested
 Debian              |              |             |      ✔     | 
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 
