@@ -28,4 +28,4 @@ touch OWM_license.txt
 touch WFA_api.txt
 touch NewsAPI_api.txt
 cd /home/pi/Desktop/MyAssistantOS-Raspbian
-python my.py
+python3 my.py
