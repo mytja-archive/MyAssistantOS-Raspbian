@@ -1,4 +1,4 @@
-﻿import speech_recognition as sr
+import speech_recognition as sr
 import time
 import pyaudio
 from playsound import playsound
@@ -19,7 +19,7 @@ alarm1 = []
 alarm2 = []
 alarm3 = []
 
-version = "guinea_1.2.2"
+version = "beta_1.2.2"
 
 daysOfTheWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 monthsOfTheYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -580,3 +580,4 @@ def MyRecognition():
 
 thread.start_new_thread(RTCwithAlarm, ())
 thread.start_new_thread(MyRecognition, ())
+
