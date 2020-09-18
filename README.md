@@ -3,6 +3,12 @@
 
 ## *We moved our codes to Python 3. Last supported Python 2 version is LTS1.1p1. Talkey is also depricated, and we moved to gTTS and our gTTS wrapper. Talkey is still TTS engine in LTS1.1p1*
 
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/mytja/MyAssistantOS-Raspbian/total"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub" src="https://img.shields.io/github/license/mytja/MyAssistantOS-Raspbian"> <img src="https://img.shields.io/badge/Python-3-blue">
+
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/mytja/MyAssistantOS-Raspbian?style=social"> <img alt="GitHub stars" src="https://img.shields.io/github/stars/mytja/MyAssistantOS-Raspbian?style=social"> <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/mytja/MyAssistantOS-Raspbian?style=social">
+
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/mytja/MyAssistantOS-Raspbian?label=Stable%20release"> <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/mytja/MyAssistantOS-Raspbian?include_prereleases&label=Pre-release">
+
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
 
 Offical pages, useful links & linked repositories: 
