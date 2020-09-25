@@ -3,6 +3,12 @@
 
 ## *We moved our codes to Python 3. Last supported Python 2 version is LTS1.1p1. Talkey is also depricated, and we moved to gTTS and our gTTS wrapper. Talkey is still TTS engine in LTS1.1p1*
 
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/mytja/MyAssistantOS-Raspbian/total"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub" src="https://img.shields.io/github/license/mytja/MyAssistantOS-Raspbian"> <img src="https://img.shields.io/badge/Python-3-blue">
+
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/mytja/MyAssistantOS-Raspbian?style=social"> <img alt="GitHub stars" src="https://img.shields.io/github/stars/mytja/MyAssistantOS-Raspbian?style=social"> <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/mytja/MyAssistantOS-Raspbian?style=social">
+
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/mytja/MyAssistantOS-Raspbian?label=Stable%20release"> <img alt="GitHub release (latest by date including pre-releases)" src="https://img.shields.io/github/v/release/mytja/MyAssistantOS-Raspbian?include_prereleases&label=Pre-release">
+
 Open-source voice assistant platform by MyTja. It is fully compatible with Raspbian.
 
 Offical pages, useful links & linked repositories: 
@@ -37,12 +43,11 @@ pip install python-vlc
 pip install pafy
 pip install youtube-search-python
 pip install youtube-dl
+pip install StringToInteger
 ```
 But if you run command ./oobe, this will install libraries for you!
 
 # OOBE and OWM key
-*This part is talking about a feature, that isn't tested yet!*
-
 OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
 
 # LTS (Long Term Support)
@@ -135,7 +140,7 @@ Here is a compatibility table:
 Devices / OS       | Tested Works | Doesn't Work | Not Tested  | Notes
 ------------------ | :----------: | :----------: | :---------: | -----
 Microsoft Windows 7|      ✔      |             |            | We used eSpeak for TTS engine
-Raspbian           |      ✔       |             |            | We tested only Guinea pig 1.0
+Raspbian           |      ✔       |             |            | We are slowly testing 1.2, 1.3 should be fully tested
 Debian              |              |             |      ✔     | 
 Ubuntu             |              |             |      ✔     | 
 Windows 10         |              |             |      ✔     | 

@@ -19,11 +19,14 @@ python3 -m pip install gTTS --user
 python3 -m pip install youtube-search-python --user
 python3 -m pip install StringToInteger --user
 python3 -m pip install youtube-dl --user
+sudo apt-get install python3-pyaudio
+cd /home/pi/Desktop/MyAssistantOS-Raspbian
 mv vol /home/pi/Desktop
 cd ~/Desktop
 mkdir apikeys
+cd apikeys
 touch OWM_license.txt
 touch WFA_api.txt
 touch NewsAPI_api.txt
 cd /home/pi/Desktop/MyAssistantOS-Raspbian
-python my.py
+python3 my.py
