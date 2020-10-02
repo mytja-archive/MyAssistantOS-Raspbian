@@ -50,15 +50,59 @@ But if you run command ./oobe, this will install libraries for you!
 # OOBE and OWM key
 OOBE will automaticly create txt file called "OWM_license.txt", which will be first empty. Your job is to fill it in with an OWM key, so that you will be able to recieve weather information.
 
-# LTS (Long Term Support)
+# Releases
+
+## Guinea Pig
+Guinea Pig releases are under branch "guineapig" and are first public releases of newest releases!
+
+This releases got support for 3 months under following conditions:
+- If none of newer releases (Beta, Stable or LTS) has been released
+- If none of new guineapig releases are released
+
+## Beta
+Beta releases are under branch "beta"! Less than 20% of releases got its Beta release!
+
+This releases got support for 3 months under following conditions:
+- If none of newer releases (Stable or LTS) has been released
+- If none of new beta releases are released
+
+## Stable
+Stable releases are under branch "master"! Less than 10% of releases got its Stable release!
+
+This releases got support for unlimited time under following conditions:
+- If none of newer LTS releases has been released
+- If none of new stable releases are released
+
+## LTS (Long Term Support)
 *This releases are new and patches will come*
+
+LTS releases are under branch "lts"! Less than 5% of releases got its LTS release! Every release gets also its own branch
 
 Long Term Support (LTS) release is a stable release, that is promoted to an LTS edition. Normaly, an LTS edition has 2 years of support, other releases end their support in 3 months from first publishing.
 
-# Get the API key from OWM
+### LTS release patches
+
+LTS releases can get patches, if:
+- LTS version has a bug, that massively influences quality of My and everyday questions and answers
+LTS release patches are named like this:
+- LTS + version of LTS release + p + patch number (example LTS1.1p1 (Long Term Support release 1.1 patch 1)
+If a LTS release patch is published:
+- All of its LTS not-patched versions are ended with its support, and this one is supported, which how much time has been left on previous release
+
+# Get the API keys from ...
+
+## OWM
 OWM is OpenWeatherMap. If you want My to tell you the weather, then you will need the API key.
 Full tutorial is avaiable here: https://github.com/csparpa/pyowm
 Thanks to @csparpa
+
+## Wolfram Alpha
+*Not yet made!*
+Wolfram Alpha is a API key service, that provides answers to expert questions, and calculations, and it's some kind of upgrade to Wikipedia (which will still be used)!
+
+## NewsAPI
+*Not yet released!*
+NewsAPI is a API for gathering News.
 
 Here you go! You are done with basic part!
 
