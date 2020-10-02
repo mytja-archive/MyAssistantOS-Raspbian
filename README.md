@@ -84,8 +84,10 @@ Long Term Support (LTS) release is a stable release, that is promoted to an LTS 
 
 LTS releases can get patches, if:
 - LTS version has a bug, that massively influences quality of My and everyday questions and answers
+
 LTS release patches are named like this:
 - LTS + version of LTS release + p + patch number (example LTS1.1p1 (Long Term Support release 1.1 patch 1)
+
 If a LTS release patch is published:
 - All of its LTS not-patched versions are ended with its support, and this one is supported, which how much time has been left on previous release
 
