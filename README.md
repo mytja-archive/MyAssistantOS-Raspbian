@@ -1,6 +1,9 @@
 # MyAssistantOS-Raspbian
 ![mytja-myassistantos-logo](https://user-images.githubusercontent.com/52399966/85886486-803c0680-b7e6-11ea-9e16-a1fd212c0f81.png)
 
+# Note
+As of 28.1.2020, this library is unmaintained for at least a period of 1 year. It will not recieve any updates during that period.
+
 ## *We moved our codes to Python 3. Last supported Python 2 version is LTS1.1p1. Talkey is also depricated, and we moved to gTTS and our gTTS wrapper. Talkey is still TTS engine in LTS1.1p1*
 
 <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/mytja/MyAssistantOS-Raspbian/total"> <img alt="GitHub issues" src="https://img.shields.io/github/issues/mytja/MyAssistantOS-Raspbian"> <img alt="GitHub" src="https://img.shields.io/github/license/mytja/MyAssistantOS-Raspbian"> <img src="https://img.shields.io/badge/Python-3-blue">
